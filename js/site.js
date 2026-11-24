@@ -379,7 +379,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // !important: the theme sets `border-top` as a shorthand and a plain
         // inline longhand loses to it, which leaves the header overlapping the
         // first element on the page.
-        if (h > 0) document.body.style.setProperty('border-top-width', (h + 8) + 'px', 'important');
+        // A width with no border-style computes to 0, so set the whole shorthand.
+        if (h > 0) document.body.style.setProperty('border-top', (h + 8) + 'px solid transparent', 'important');
     }
     sync();
     window.addEventListener('load', sync);
