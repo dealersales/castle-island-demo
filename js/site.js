@@ -376,7 +376,10 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!header) return;
     function sync() {
         var h = Math.round(header.getBoundingClientRect().height);
-        if (h > 0) document.body.style.borderTopWidth = (h + 8) + 'px';
+        // !important: the theme sets `border-top` as a shorthand and a plain
+        // inline longhand loses to it, which leaves the header overlapping the
+        // first element on the page.
+        if (h > 0) document.body.style.setProperty('border-top-width', (h + 8) + 'px', 'important');
     }
     sync();
     window.addEventListener('load', sync);
